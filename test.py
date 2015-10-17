@@ -16,7 +16,7 @@ from app.article.models import Article
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
-class TestCase(unittest.TestCase):
+class articlemodelcase(unittest.TestCase):
     def setUp(self):
         app.config['TESTING'] = True
         app.config['WTF_CSRF_ENABLED'] = False
@@ -27,18 +27,13 @@ class TestCase(unittest.TestCase):
         ctx.push()
         return app
 
+
     def tearDown(self):
         db.session.remove()
         db.drop_all()
 
-    def testarticle(self):
 
-        test = app.test_client(self)
-        response = test.get('/art/delete/', content_type='html/text')
-        self.assertEqual(response.status_code, 200)
-        assert 'token' in session
-        self.assertTrue(User.verify_token(session['token'])!=None)
-    def testarticledeletepost(self):
+    def testarticlemodelpost(self):
         user = User(username='testuser',
         email='test@example.com',
         password='test',
